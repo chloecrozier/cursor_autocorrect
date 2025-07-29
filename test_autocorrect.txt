@@ -1,6 +1,0 @@
-Let's test some common typos in this file.
-teh → should become "the"
-adn → should become "and" 
-recieve → should become "receive"
-seperate → should become "separate"
-definately → should become "definitely"

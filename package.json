@@ -1,7 +1,7 @@
 {
   "name": "cursor-autocorrect",
   "displayName": "Cursor Autocorrect",
-  "description": "Basic autocorrect functionality for text files in Cursor",
+  "description": "Basic autocorrect functionality for text files in VS Code/Cursor",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.74.0"

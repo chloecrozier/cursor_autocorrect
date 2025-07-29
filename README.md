@@ -1,63 +1,48 @@
 # Cursor Autocorrect
 
-A basic autocorrect extension for Cursor/VS Code that automatically fixes common typos in text files.
+A simple autocorrect extension for VS Code/Cursor that fixes common typos as you type.
+
+## Quick Start
+
+1. **Install the extension** from the `.vsix` file
+2. **Open any `.txt` or `.md` file**
+3. **Type common typos** like `teh `, `adn `, `recieve ` (with space)
+4. **Watch them auto-correct!**
 
 ## Features
 
-- **Real-time autocorrect**: Automatically corrects common misspellings as you type
-- **Manual correction**: Correct the current word with a keyboard shortcut
-- **Configurable**: Customize which file types and corrections are active
-- **Case preservation**: Maintains the original capitalization of your text
+- ✅ **Real-time correction**: Fixes typos when you press space/enter
+- ✅ **Manual correction**: `Cmd+Shift+C` (or `Ctrl+Shift+C`) to fix current word
+- ✅ **Toggle on/off**: Command palette → "Toggle Autocorrect"
+- ✅ **Customizable**: Add your own corrections in settings
 
-## Usage
+## Settings
 
-### Automatic Correction
-The extension automatically corrects common typos when you:
-- Press space, tab, or enter after a misspelled word
-- Move to a new line
+Search for `cursor-autocorrect` in VS Code/Cursor settings:
 
-### Manual Correction
-- Position your cursor on a word and press `Ctrl+Shift+C` (or `Cmd+Shift+C` on Mac)
-- Or use the command palette: "Correct Current Word"
+- **Enable/disable**: `cursor-autocorrect.enabled`
+- **File types**: `cursor-autocorrect.languages` 
+- **Custom corrections**: `cursor-autocorrect.corrections`
 
-### Toggle Autocorrect
-- Use the command palette: "Toggle Autocorrect" to enable/disable the feature
+## Default Corrections
 
-## Configuration
-
-You can customize the extension through VS Code settings:
-
-### `cursor-autocorrect.enabled`
-- Type: `boolean`
-- Default: `true`
-- Description: Enable/disable autocorrect functionality
-
-### `cursor-autocorrect.languages`
-- Type: `array`
-- Default: `["plaintext", "markdown", "text"]`
-- Description: File types where autocorrect should be active
-
-### `cursor-autocorrect.corrections`
-- Type: `object`
-- Description: Custom word corrections (misspelled: correct)
-- Default includes common typos like:
-  - `teh` → `the`
-  - `adn` → `and`
-  - `recieve` → `receive`
-  - `seperate` → `separate`
-  - And many more...
+The extension fixes these common typos:
+- `teh` → `the`
+- `adn` → `and`
+- `recieve` → `receive`
+- `seperate` → `separate`
+- `definately` → `definitely`
+- And 10+ more...
 
 ## Adding Custom Corrections
 
-1. Open VS Code/Cursor settings
+1. Open settings (`Cmd+,` or `Ctrl+,`)
 2. Search for "cursor-autocorrect"
-3. Edit the "corrections" object to add your own typos and corrections
+3. Edit "corrections" to add your own:
 
-Example:
 ```json
 {
   "cursor-autocorrect.corrections": {
-    "teh": "the",
     "youre": "you're",
     "cant": "can't",
     "wont": "won't"
@@ -67,20 +52,45 @@ Example:
 
 ## Development
 
-### Setup
-1. Clone this repository
-2. Run `npm install` to install dependencies
-3. Press `F5` to open a new VS Code window with the extension loaded
+```bash
+# Set up environment
+nvm use cursor-autocorrect
+npm install
+npm run compile
 
-### Building
-- `npm run compile` - Compile the TypeScript source
-- `npm run watch` - Watch for changes and compile automatically
+# Package extension
+vsce package
+```
+
+## Next Steps: Full Dictionary Implementation
+
+Want to add comprehensive spell checking? Here's the roadmap:
+
+### Phase 1: Dictionary Integration
+- **Add word lists**: Integrate common dictionaries (e.g., `american-english`, `british-english`)
+- **Smart suggestions**: Use Levenshtein distance for "did you mean?" suggestions
+- **Language detection**: Auto-detect document language
+
+### Phase 2: Advanced Features
+- **Context awareness**: Different corrections for different contexts
+- **Machine learning**: Learn from user corrections over time
+- **Performance optimization**: Efficient trie data structures for large dictionaries
+
+### Phase 3: Professional Features
+- **Medical/Legal dictionaries**: Specialized vocabulary
+- **Custom dictionaries**: Import/export user dictionaries
+- **Team sharing**: Share corrections across teams
+
+### Implementation Guide:
+1. **Install dictionary packages**: `npm install american-english-words`
+2. **Add fuzzy matching**: `npm install fuse.js` or `levenshtein`
+3. **Update extension logic**: Replace static corrections with dictionary lookup
+4. **Add suggestion UI**: VS Code/Cursor quick-fix provider for multiple suggestions
+5. **Add settings**: Dictionary language, suggestion count, confidence threshold
+
+Want to contribute? The foundation is ready - just extend the `getCorrection()` function!
 
 ## Requirements
 
-- VS Code 1.74.0 or higher
-- Node.js for development
-
-## License
-
-This project is open source and available under the MIT License.
+- VS Code/Cursor 1.74.0+
+- Node.js 18+ for development
